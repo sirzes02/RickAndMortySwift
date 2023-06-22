@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Controller to show and earch for Settings
 final class RMSettingsViewController: UIViewController {
 
     override func viewDidLoad() {

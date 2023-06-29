@@ -5,7 +5,7 @@
 //  Created by Santiago Varela on 23/06/23.
 //
 
-import Foundation
+import UIKit
 
 protocol RMEpisodeDataRender {
     var name: String { get }
@@ -14,6 +14,8 @@ protocol RMEpisodeDataRender {
 }
 
 final class RMCharacterEpisodeCollectionViewCellViewModel: Hashable, Equatable {
+    public let borderColor: UIColor
+    
     private let episodeDataUrl: URL?
     private var isFetching = false
     private var dataBlock: ((RMEpisodeDataRender) -> Void)?
@@ -29,8 +31,9 @@ final class RMCharacterEpisodeCollectionViewCellViewModel: Hashable, Equatable {
     
     // MARK: - INIT
     
-    init(episodeDataUrl: URL?) {
+    init(episodeDataUrl: URL?, borderColor: UIColor = .systemBlue) {
         self.episodeDataUrl = episodeDataUrl
+        self.borderColor = borderColor
     }
     
     // MARK: - Public

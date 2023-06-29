@@ -25,7 +25,7 @@ class RMEpisodeDetailViewViewModel: NSObject {
             case .success(let success):
                 print()
             case .failure(let failure):
-                print()
+                break
             }
         }
     }

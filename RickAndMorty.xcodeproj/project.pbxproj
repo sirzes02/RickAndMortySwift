@@ -56,6 +56,7 @@
 		2FE5FF0C2A4FD4D7008DBF82 /* RMSettingsViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5FF0B2A4FD4D7008DBF82 /* RMSettingsViewViewModel.swift */; };
 		2FE5FF0E2A4FD4F4008DBF82 /* RMSettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5FF0D2A4FD4F4008DBF82 /* RMSettingCellViewModel.swift */; };
 		2FE5FF102A4FD588008DBF82 /* RMSettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5FF0F2A4FD588008DBF82 /* RMSettingsOption.swift */; };
+		2FE5FF132A4FD87C008DBF82 /* RMSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE5FF122A4FD87C008DBF82 /* RMSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		2FE5FF0B2A4FD4D7008DBF82 /* RMSettingsViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSettingsViewViewModel.swift; sourceTree = "<group>"; };
 		2FE5FF0D2A4FD4F4008DBF82 /* RMSettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSettingCellViewModel.swift; sourceTree = "<group>"; };
 		2FE5FF0F2A4FD588008DBF82 /* RMSettingsOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSettingsOption.swift; sourceTree = "<group>"; };
+		2FE5FF122A4FD87C008DBF82 /* RMSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 		2F0C9AB42A4404BD00082A26 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2FE5FF112A4FD85E008DBF82 /* SwiftUI */,
 				2F0C47422A4DFDE8003BFA52 /* EpisodeDetals */,
 				2F3C7FF92A48E5E10069E501 /* Episode */,
 				2F25F3582A464D18007D2EB7 /* CharacterDetails */,
@@ -317,6 +320,14 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		2FE5FF112A4FD85E008DBF82 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				2FE5FF122A4FD87C008DBF82 /* RMSettingsView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		2FFA792B2A44162600774A49 /* DataTypes */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +447,7 @@
 				2F25F35B2A464D63007D2EB7 /* RMCharacterPhotoCollectionViewCell.swift in Sources */,
 				2F25F3662A464E1E007D2EB7 /* RMCharacterEpisodeCollectionViewCellViewModel.swift in Sources */,
 				2F97D62E2A456127009E890D /* Extensions.swift in Sources */,
+				2FE5FF132A4FD87C008DBF82 /* RMSettingsView.swift in Sources */,
 				2F0C9ABA2A44055C00082A26 /* RMLocation.swift in Sources */,
 				2F25F3622A464DF9007D2EB7 /* RMCharacterPhotoCollectionViewCellViewModel.swift in Sources */,
 				2F0C9ACF2A440A1500082A26 /* RMEndpoint.swift in Sources */,

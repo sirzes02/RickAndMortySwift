@@ -8,7 +8,7 @@
 import UIKit
 
 /// Controller to show and earch for Locations
-final class RMLocationViewController: UIViewController {
+final class RMLocationViewController: UIViewController, RMLocationViewViewModelDelegate {
     private let primaryView = RMLocationView()
     private let viewModel = RMLocationViewViewModel()
 
@@ -19,6 +19,8 @@ final class RMLocationViewController: UIViewController {
         title = "Locations"
         addSearchButton()
         addConstraints()
+        viewModel.delegate = self
+        viewModel.fetchLocations()
     }
     
     private func addSearchButton() {
@@ -37,5 +39,11 @@ final class RMLocationViewController: UIViewController {
     @objc
     private func didTapSearch() {
         
+    }
+    
+    // MARK: - LocationViewModel Delegate
+    
+    func didFetchInitialLocations() {
+        primaryView.configure(with: viewModel)
     }
 }

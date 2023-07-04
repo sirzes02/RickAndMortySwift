@@ -8,12 +8,13 @@
 import UIKit
 
 /// Controller to show and earch for Locations
-final class RMLocationViewController: UIViewController, RMLocationViewViewModelDelegate {
+final class RMLocationViewController: UIViewController, RMLocationViewViewModelDelegate, RMLocationViewDelegate {
     private let primaryView = RMLocationView()
     private let viewModel = RMLocationViewViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        primaryView.delegate = self
         view.addSubview(primaryView)
         view.backgroundColor = .systemBackground
         title = "Locations"
@@ -39,6 +40,14 @@ final class RMLocationViewController: UIViewController, RMLocationViewViewModelD
     @objc
     private func didTapSearch() {
         
+    }
+    
+    // MARK: - RMLocationsViewDelegate
+    
+    func rmLocationView(_ locationView: RMLocationView, didSelect location: RMLocation) {
+        let vc = RMLocationsDetailViewController(location: location)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - LocationViewModel Delegate

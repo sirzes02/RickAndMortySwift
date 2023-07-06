@@ -62,8 +62,8 @@ final class RMCharacterEpisodeCollectionViewCellViewModel: Hashable, Equatable {
                 DispatchQueue.main.async {
                     self?.episode = model
                 }
-            case .failure(let failure):
-                print()
+            case .failure:
+                break
             }
         }
     }

@@ -53,7 +53,7 @@ final class RMLocationViewViewModel {
                 DispatchQueue.main.async {
                     self?.delegate?.didFetchInitialLocations()
                 }
-            case .failure(let model):
+            case .failure:
                 break
             }
         }

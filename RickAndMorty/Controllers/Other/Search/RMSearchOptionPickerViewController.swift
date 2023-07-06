@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RMSearchOptonPickerViewController: UIViewController {
+class RMSearchOptionPickerViewController: UIViewController {
     private let option: RMSearchInputViewViewModel.DynamicOption
     private let selectionBlock: ((String) -> Void)
     
@@ -53,7 +53,7 @@ class RMSearchOptonPickerViewController: UIViewController {
     }
 }
 
-extension RMSearchOptonPickerViewController: UITableViewDelegate, UITableViewDataSource {
+extension RMSearchOptionPickerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return option.choices.count
     }

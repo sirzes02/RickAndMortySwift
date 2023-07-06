@@ -8,7 +8,7 @@
 import UIKit
 
 /// Configurable controller to search
-class RMSearchViewController: UIViewController {
+final class RMSearchViewController: UIViewController {
     /// Configuration for search session
     struct Config {
         enum `Type` {
@@ -23,7 +23,7 @@ class RMSearchViewController: UIViewController {
                 case .location:
                     return "Search Location"
                 case .episode:
-                    return "earch Episode"
+                    return "Search Episode"
                 }
             }
         }
@@ -40,7 +40,7 @@ class RMSearchViewController: UIViewController {
     init(config: Config) {
         let viewModel = RMSearchViewViewModel(config: config)
         self.viewModel = viewModel
-        self.searchView = RMSearchView(frame: .zero, viewModel: RMSearchViewViewModel(config: config))
+        self.searchView = RMSearchView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,7 +61,7 @@ class RMSearchViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidDisappear(animated)
         searchView.presentKeyboard()
     }
     

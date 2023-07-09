@@ -75,47 +75,47 @@ final class RMEpisodeListViewViewModel: NSObject {
     
     /// Paginate if aditional episodes are needed
     public func fetchAdditionalEpisodes(url: URL) {
-           guard !isLoadingMoreEpisodes else {
-               return
-           }
-           isLoadingMoreEpisodes = true
-           guard let request = RMRequest(url: url) else {
-               isLoadingMoreEpisodes = false
-               return
-           }
-           
-           RMService.shared.execute(request, expecting: RMGetAllEpisodesResponse.self) { [weak self] result in
-               guard let strongSelf = self else {
-                   return
-               }
-               switch result {
-               case .success(let responseModel):
-                   let moreResults = responseModel.results
-                   let info = responseModel.info
-                   strongSelf.apiInfo = info
-
-                   let originalCount = strongSelf.episodes.count
-                   let newCount = moreResults.count
-                   let total = originalCount+newCount
-                   let startingIndex = total - newCount
-                   let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex+newCount)).compactMap({
-                       return IndexPath(row: $0, section: 0)
-                   })
-                   strongSelf.episodes.append(contentsOf: moreResults)
-
-                   DispatchQueue.main.async {
-                       strongSelf.delegate?.didLoadMoreEpisodes(
-                           with: indexPathsToAdd
-                       )
-
-                       strongSelf.isLoadingMoreEpisodes = false
-                   }
-               case .failure(let failure):
-                   print(String(describing: failure))
-                   self?.isLoadingMoreEpisodes = false
-               }
-           }
-       }
+        guard !isLoadingMoreEpisodes else {
+            return
+        }
+        isLoadingMoreEpisodes = true
+        guard let request = RMRequest(url: url) else {
+            isLoadingMoreEpisodes = false
+            return
+        }
+        
+        RMService.shared.execute(request, expecting: RMGetAllEpisodesResponse.self) { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let responseModel):
+                let moreResults = responseModel.results
+                let info = responseModel.info
+                strongSelf.apiInfo = info
+                
+                let originalCount = strongSelf.episodes.count
+                let newCount = moreResults.count
+                let total = originalCount+newCount
+                let startingIndex = total - newCount
+                let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex+newCount)).compactMap({
+                    return IndexPath(row: $0, section: 0)
+                })
+                strongSelf.episodes.append(contentsOf: moreResults)
+                
+                DispatchQueue.main.async {
+                    strongSelf.delegate?.didLoadMoreEpisodes(
+                        with: indexPathsToAdd
+                    )
+                    
+                    strongSelf.isLoadingMoreEpisodes = false
+                }
+            case .failure(let failure):
+                print(String(describing: failure))
+                self?.isLoadingMoreEpisodes = false
+            }
+        }
+    }
     
     public var shouldShowLoadMoreIndicator: Bool {
         return apiInfo != nil
@@ -194,7 +194,7 @@ extension RMEpisodeListViewViewModel: UIScrollViewDelegate {
             let offset = scrollView.contentOffset.y
             let totalContentHeight = scrollView.contentSize.height
             let totalScrollViewFixedHeight = scrollView.frame.size.height
-
+            
             if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
                 self?.fetchAdditionalEpisodes(url: url)
             }

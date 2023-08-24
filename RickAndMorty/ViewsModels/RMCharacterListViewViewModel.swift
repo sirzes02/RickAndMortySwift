@@ -63,47 +63,47 @@ final class RMCharacterListViewViewModel: NSObject {
     
     /// Paginate if aditional characters are needed
     public func fetchAdditionalCharacters(url: URL) {
-           guard !isLoadingMoreCharacters else {
-               return
-           }
-           isLoadingMoreCharacters = true
-           guard let request = RMRequest(url: url) else {
-               isLoadingMoreCharacters = false
-               return
-           }
-           
-           RMService.shared.execute(request, expecting: RMGetAllCharactersResponse.self) { [weak self] result in
-               guard let strongSelf = self else {
-                   return
-               }
-               switch result {
-               case .success(let responseModel):
-                   let moreResults = responseModel.results
-                   let info = responseModel.info
-                   strongSelf.apiInfo = info
-
-                   let originalCount = strongSelf.characters.count
-                   let newCount = moreResults.count
-                   let total = originalCount+newCount
-                   let startingIndex = total - newCount
-                   let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex+newCount)).compactMap({
-                       return IndexPath(row: $0, section: 0)
-                   })
-                   strongSelf.characters.append(contentsOf: moreResults)
-
-                   DispatchQueue.main.async {
-                       strongSelf.delegate?.didLoadMoreCharacters(
-                           with: indexPathsToAdd
-                       )
-
-                       strongSelf.isLoadingMoreCharacters = false
-                   }
-               case .failure(let failure):
-                   print(String(describing: failure))
-                   self?.isLoadingMoreCharacters = false
-               }
-           }
-       }
+        guard !isLoadingMoreCharacters else {
+            return
+        }
+        isLoadingMoreCharacters = true
+        guard let request = RMRequest(url: url) else {
+            isLoadingMoreCharacters = false
+            return
+        }
+        
+        RMService.shared.execute(request, expecting: RMGetAllCharactersResponse.self) { [weak self] result in
+            guard let strongSelf = self else {
+                return
+            }
+            switch result {
+            case .success(let responseModel):
+                let moreResults = responseModel.results
+                let info = responseModel.info
+                strongSelf.apiInfo = info
+                
+                let originalCount = strongSelf.characters.count
+                let newCount = moreResults.count
+                let total = originalCount+newCount
+                let startingIndex = total - newCount
+                let indexPathsToAdd: [IndexPath] = Array(startingIndex..<(startingIndex+newCount)).compactMap({
+                    return IndexPath(row: $0, section: 0)
+                })
+                strongSelf.characters.append(contentsOf: moreResults)
+                
+                DispatchQueue.main.async {
+                    strongSelf.delegate?.didLoadMoreCharacters(
+                        with: indexPathsToAdd
+                    )
+                    
+                    strongSelf.isLoadingMoreCharacters = false
+                }
+            case .failure(let failure):
+                print(String(describing: failure))
+                self?.isLoadingMoreCharacters = false
+            }
+        }
+    }
     
     public var shouldShowLoadMoreIndicator: Bool {
         return apiInfo != nil
@@ -154,8 +154,17 @@ extension RMCharacterListViewViewModel: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionviewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let bounds = UIScreen.main.bounds
-        let width = (bounds.width - 30) / 2
+        
+        let isIphone = UIDevice.current.userInterfaceIdiom == .phone
+        let bounds = collectionView.bounds
+        let width: CGFloat
+        
+        if isIphone {
+            width = (bounds.width - 30) / 2
+        } else {
+            // mac | ipad
+            width = (bounds.width - 50) / 4
+        }
         
         return CGSize(width: width, height: width * 1.5)
     }
@@ -182,7 +191,7 @@ extension RMCharacterListViewViewModel: UIScrollViewDelegate {
             let offset = scrollView.contentOffset.y
             let totalContentHeight = scrollView.contentSize.height
             let totalScrollViewFixedHeight = scrollView.frame.size.height
-
+            
             if offset >= (totalContentHeight - totalScrollViewFixedHeight - 120) {
                 self?.fetchAdditionalCharacters(url: url)
             }

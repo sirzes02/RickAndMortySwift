@@ -35,10 +35,16 @@ final class RMLocationViewViewModel {
     
     public var isLoadingMoreLocations = false
     
+    private var didFinishPagination: (() -> Void)?
+    
     // MARK: - Init
     
     init() {
         
+    }
+    
+    public func registerDidFinishPaginationBlock(_ block: @escaping () -> Void) {
+        self.didFinishPagination = block
     }
     
     /// Paginate if aditional locations are needed
@@ -75,6 +81,8 @@ final class RMLocationViewViewModel {
                 
                 DispatchQueue.main.async {
                     strongSelf.isLoadingMoreLocations = false
+                    // Notify via callback
+                    strongSelf.didFinishPagination?()
                 }
             case .failure(let failure):
                 print(String(describing: failure))

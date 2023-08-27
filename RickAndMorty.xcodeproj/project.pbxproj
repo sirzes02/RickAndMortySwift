@@ -161,13 +161,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F0C47422A4DFDE8003BFA52 /* EpisodeDetals */ = {
+		2F0C47422A4DFDE8003BFA52 /* EpisodeDetails */ = {
 			isa = PBXGroup;
 			children = (
 				2F3C7FF42A48E35F0069E501 /* RMEpisodeDetailView.swift */,
 				2F0C47432A4DFE17003BFA52 /* RMEpisodeInfoCollectionViewCell.swift */,
 			);
-			path = EpisodeDetals;
+			path = EpisodeDetails;
 			sourceTree = "<group>";
 		};
 		2F0C47452A4DFE2F003BFA52 /* EpisodeDetail */ = {
@@ -235,7 +235,7 @@
 				2FF166BD2A53D65B0003ED23 /* LocationDetails */,
 				2FA8229C2A50ADF600B56039 /* Location */,
 				2FE5FF112A4FD85E008DBF82 /* SwiftUI */,
-				2F0C47422A4DFDE8003BFA52 /* EpisodeDetals */,
+				2F0C47422A4DFDE8003BFA52 /* EpisodeDetails */,
 				2F3C7FF92A48E5E10069E501 /* Episode */,
 				2F25F3582A464D18007D2EB7 /* CharacterDetails */,
 				2F25F3592A464D38007D2EB7 /* Character */,

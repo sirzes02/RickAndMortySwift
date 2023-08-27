@@ -60,7 +60,7 @@ final class RMSearchViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.config.type.title
@@ -107,6 +107,18 @@ extension RMSearchViewController: RMSearchViewDelegate {
     
     func rmSearchView(_ searchView: RMSearchView, didSelectOption location: RMLocation) {
         let vc = RMLocationsDetailViewController(location: location)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func rmSearchView(_ searchView: RMSearchView, didSelectCharacter character: RMCharacter) {
+        let vc = RMCharacterDetailViewController(viewModel: .init(character: character))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func rmSearchView(_ searchView: RMSearchView, didSelectEpisode episode: RMEpisode) {
+        let vc = RMEpisodeDetailViewController(url: URL(string: episode.url))
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
